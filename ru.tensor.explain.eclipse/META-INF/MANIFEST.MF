@@ -1,0 +1,22 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Explain PostgreSQL for Eclipse
+Bundle-SymbolicName: ru.tensor.explain.eclipse;singleton:=true
+Bundle-Version: 1.0.1
+Require-Bundle: org.eclipse.core.resources,
+ org.eclipse.core.runtime,
+ org.eclipse.ui,
+ org.eclipse.datatools.sqltools.editor.core,
+ org.eclipse.datatools.sqltools.editor.core.ui,
+ org.eclipse.datatools.sqltools.sqleditor,
+ org.eclipse.datatools.sqltools.plan,
+ com.google.gson,
+ com.equo.chromium,
+ org.jkiss.dbeaver.model.jdbc;resolution:=optional,
+ org.jkiss.dbeaver.ext.postgresql;resolution:=optional,
+ org.jkiss.dbeaver.ui.editors.sql;resolution:=optional
+Bundle-Vendor: Tensor Company Ltd
+Automatic-Module-Name: ru.tensor.explain.eclipse
+Bundle-ActivationPolicy: lazy
+Bundle-Activator: ru.tensor.explain.eclipse.ExplainPostgreSQLPlugin
+Bundle-RequiredExecutionEnvironment: JavaSE-17

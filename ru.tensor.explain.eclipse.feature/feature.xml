@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="ru.tensor.explain.eclipse.feature"
+      label="Explain PostgreSQL for Eclipse"
+      version="1.0.1"
+      provider-name="Tensor Company Ltd">
+
+   <description url="https://github.com/MGorkov/Eclipse-and-DBeaver-plugin">
+      Explain PostgreSQL plugin for Eclipse
+Analyzes EXPLAIN plan from PostgreSQL and related (Greenplum,
+Citus, TimescaleDB and Amazon RedShift).
+Shows plan and node details and visualizations with piechart,
+flowchart and tilemap, also gives smart recommendations to improve
+query.
+   </description>
+
+   <copyright url="https://github.com/MGorkov/Eclipse-and-DBeaver-plugin">
+      Copyright 2024 Tensor Company Ltd
+   </copyright>
+
+   <license url="https://github.com/MGorkov/Eclipse-and-DBeaver-plugin/blob/main/LICENSE">
+      MIT License
+
+Copyright (c) 2024 Tensor Company Ltd
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the &quot;Software&quot;), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+   </license>
+
+   <url>
+      <update label="Explain PostgreSQL update site" url="https://explain.tensor.ru/downloads/plugins/eclipse"/>
+   </url>
+
+   <requires>
+      <import feature="org.eclipse.datatools.sqldevtools.feature" version="1.15.0.202311071249" match="compatible"/>
+      <import feature="org.eclipse.datatools.enablement.postgresql.feature" version="1.15.0.202311071249" match="compatible"/>
+      <import feature="com.equo.chromium.feature" version="116.0.1" match="compatible"/>
+      <import feature="com.equo.chromium.cef.feature" version="116.0.1" match="compatible"/>
+   </requires>
+
+   <plugin
+         id="ru.tensor.explain.eclipse"
+         version="0.0.0"/>
+
+</feature>

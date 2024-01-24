@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Explain PostgreSQL for DBeaver
+Bundle-SymbolicName: ru.tensor.explain.dbeaver;singleton:=true
+Bundle-Version: 1.0.1
+Require-Bundle: org.jkiss.dbeaver.ui.editors.sql,
+ com.google.gson,
+ com.equo.chromium,
+ org.jkiss.dbeaver.model.jdbc,
+ org.jkiss.dbeaver.ext.postgresql
+Bundle-Vendor: Tensor Company Ltd
+Automatic-Module-Name: ru.tensor.explain.dbeaver
+Bundle-ActivationPolicy: lazy
+Bundle-Activator: ru.tensor.explain.dbeaver.ExplainPostgreSQLPlugin
+Bundle-RequiredExecutionEnvironment: JavaSE-17
