@@ -7,15 +7,14 @@ import java.net.http.HttpResponse;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.time.Duration;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 import org.eclipse.core.runtime.ILog;
 import org.eclipse.jface.preference.IPreferenceStore;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import ru.tensor.explain.dbeaver.ExplainPostgreSQLPlugin;
 import ru.tensor.explain.dbeaver.preferences.PreferenceConstants;
@@ -39,18 +38,15 @@ public class ExplainAPI implements IExplainAPI {
     @Override
 	public CompletableFuture<String> beautifier(String sql) {
     	EXPLAIN_URL = getExplainURL();
-        Gson gson = new Gson();
-        Map<String, String> stringMap = new LinkedHashMap<>();
-        stringMap.put("query_src", sql);
-        String json = gson.toJson(stringMap);
-        TypeToken<Map<String, String>> mapType = new TypeToken<Map<String, String>>(){};
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("query_src", sql);
 
-        log.info("POST JSON: " + json);
+        log.info("POST JSON: " + jsonObject);
 
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .header("content-type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString(json.toString()))
+                .POST(HttpRequest.BodyPublishers.ofString(jsonObject.toString()))
                 .timeout(Duration.ofSeconds(30))
                 .uri(URI.create(EXPLAIN_URL + API_BEAUTIFIER))
                 .build();
@@ -59,8 +55,9 @@ public class ExplainAPI implements IExplainAPI {
                 .thenApply(HttpResponse::body)
                 .thenApply((res) -> {
                     log.info("Beautifier result: " + res);
-                    Map<String, String> resMap = gson.fromJson(res, mapType);
-                    return resMap.get("btf_query_text");
+                    JsonElement jsonElement = JsonParser.parseString(res);
+                    JsonObject object = jsonElement.getAsJsonObject();
+                    return object.get("btf_query_text").getAsString();
                 })
                 .exceptionally((ex) -> {
                     log.info("Got exception " + ex.getMessage());
@@ -71,20 +68,18 @@ public class ExplainAPI implements IExplainAPI {
     @Override
 	public CompletableFuture<String> plan_archive(String plan, String query) {
     	EXPLAIN_URL = getExplainURL();
-        Gson gson = new Gson();
-        Map<String, String> stringMap = new LinkedHashMap<>();
-        stringMap.put("plan", plan);
-        stringMap.put("query", query);
-        String json = gson.toJson(stringMap);
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("plan", plan);
+        jsonObject.addProperty("query", query);
 
-        log.info("POST JSON: " + json);
+        log.info("POST JSON: " + jsonObject);
 
         MessageFormat format = new MessageFormat("Found. Redirecting to {0}");
 
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .header("content-type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString(json.toString()))
+                .POST(HttpRequest.BodyPublishers.ofString(jsonObject.toString()))
                 .timeout(Duration.ofSeconds(30))
                 .uri(URI.create(EXPLAIN_URL + API_PLANARCHIVE))
                 .build();
