@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature id="ru.tensor.explain.eclipse.feature">
+      <category name="ru.tensor.explain"/>
+   </feature>
+   <feature id="ru.tensor.explain.dbeaver.feature">
+      <category name="ru.tensor.explain"/>
+   </feature>
+   <category-def name="ru.tensor.explain" label="Explain PostgreSQL"/>
+</site>

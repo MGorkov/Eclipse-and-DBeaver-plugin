@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <description name="Explain PostgreSQL update site" url="https://explain.tensor.ru/downloads/plugins/eclipse">
+   <description name="Explain PostgreSQL update site" url="https://explain.tensor.ru/downloads/plugins/eclipse/">
       Explain PostgreSQL update site
    </description>
-   <feature url="features/ru.tensor.explain.dbeaver.feature_1.0.2.jar" id="ru.tensor.explain.dbeaver.feature" version="1.0.2">
+   <feature url="features/ru.tensor.explain.eclipse.feature_1.0.3.qualifier.jar" id="ru.tensor.explain.eclipse.feature" version="1.0.3.qualifier">
       <category name="ru.tensor.explain"/>
    </feature>
-   <feature url="features/ru.tensor.explain.eclipse.feature_1.0.2.jar" id="ru.tensor.explain.eclipse.feature" version="1.0.2">
+   <feature url="features/ru.tensor.explain.dbeaver.feature_1.0.3.qualifier.jar" id="ru.tensor.explain.dbeaver.feature" version="1.0.3.qualifier">
       <category name="ru.tensor.explain"/>
    </feature>
    <category-def name="ru.tensor.explain" label="Explain PostgreSQL">

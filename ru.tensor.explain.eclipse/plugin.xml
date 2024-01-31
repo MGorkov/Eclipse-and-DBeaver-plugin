@@ -204,7 +204,7 @@
          <command
                commandId="ru.tensor.explain.dbeaver.explain"
                icon="icons/EP.png"
-               label="Explain anayze"
+               label="Explain Analyze"
                mnemonic="E"
                style="push">
             <visibleWhen

@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Explain PostgreSQL for Eclipse
 Bundle-SymbolicName: ru.tensor.explain.eclipse;singleton:=true
-Bundle-Version: 1.0.1
+Bundle-Version: 1.0.3.qualifier
 Require-Bundle: org.eclipse.core.resources,
  org.eclipse.core.runtime,
  org.eclipse.ui,

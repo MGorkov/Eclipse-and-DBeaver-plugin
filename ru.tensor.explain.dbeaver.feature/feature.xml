@@ -2,7 +2,7 @@
 <feature
       id="ru.tensor.explain.dbeaver.feature"
       label="Explain PostgreSQL for DBeaver"
-      version="1.0.2"
+      version="1.0.3.qualifier"
       provider-name="Tensor Company Ltd">
 
    <description url="https://github.com/MGorkov/Eclipse-and-DBeaver-plugin">
@@ -43,7 +43,7 @@ SOFTWARE.
    </license>
 
    <url>
-      <update label="Explain PostgreSQL update site" url="https://explain.tensor.ru/downloads/plugins/eclipse"/>
+      <update label="Explain PostgreSQL update site" url="https://explain.tensor.ru/downloads/plugins/eclipse/"/>
       <discovery label="Equo Chromium Composite P2 All Versions" url="https://dl.equo.dev/chromium-swt-ee/marketplace/p2/"/>
    </url>
 
