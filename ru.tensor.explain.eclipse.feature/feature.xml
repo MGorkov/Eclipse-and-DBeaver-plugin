@@ -49,8 +49,8 @@ SOFTWARE.
    <requires>
       <import feature="org.eclipse.datatools.sqldevtools.feature" version="1.15.0.202311071249" match="compatible"/>
       <import feature="org.eclipse.datatools.enablement.postgresql.feature" version="1.15.0.202311071249" match="compatible"/>
-      <import feature="com.equo.chromium.feature" version="116.0.1" match="compatible"/>
-      <import feature="com.equo.chromium.cef.feature" version="116.0.1" match="compatible"/>
+      <import feature="com.equo.chromium.feature" version="116.0.2" match="compatible"/>
+      <import feature="com.equo.chromium.cef.feature" version="116.0.2" match="compatible"/>
    </requires>
 
    <plugin

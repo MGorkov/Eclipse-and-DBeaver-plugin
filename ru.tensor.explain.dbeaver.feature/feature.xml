@@ -44,12 +44,11 @@ SOFTWARE.
 
    <url>
       <update label="Explain PostgreSQL update site" url="https://explain.tensor.ru/downloads/plugins/eclipse/"/>
-      <discovery label="Equo Chromium Composite P2 All Versions" url="https://dl.equo.dev/chromium-swt-ee/marketplace/p2/"/>
    </url>
 
    <requires>
-      <import feature="com.equo.chromium.cef.feature" version="116.0.1"/>
-      <import feature="com.equo.chromium.feature" version="116.0.1"/>
+      <import feature="com.equo.chromium.cef.feature" version="116.0.2" match="compatible"/>
+      <import feature="com.equo.chromium.feature" version="116.0.2" match="compatible"/>
    </requires>
 
    <plugin

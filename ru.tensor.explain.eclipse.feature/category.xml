@@ -7,4 +7,5 @@
       <category name="ru.tensor.explain"/>
    </feature>
    <category-def name="ru.tensor.explain" label="Explain PostgreSQL"/>
+   <repository-reference location="https://dl.equo.dev/chromium-swt-ee/marketplace/p2/" name="Equo Chromium Composite P2 All Versions" enabled="true" />
 </site>
