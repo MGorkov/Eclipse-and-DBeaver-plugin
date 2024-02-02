@@ -46,7 +46,16 @@ public class PostgresPlanView extends ViewPart {
 	@Override
 	public void createPartControl(Composite parent) {
 		store = ExplainPostgreSQLPlugin.getDefault().getPreferenceStore();
-		fBrowser = new Browser(parent, SWT.NONE);
+		try {
+			fBrowser = new Browser(parent, SWT.NONE);
+		} catch (Throwable thr) {
+			store.setValue(PreferenceConstants.P_EXTERNAL, true);
+			log.log(new Status(IStatus.ERROR,
+					ExplainPostgreSQLPlugin.PLUGIN_ID,
+					"createBrowser failed: " + thr.getMessage()
+				)
+			);
+		}
 		ExplainPostgreSQLPlugin.getPlanManager().addPlanListener(_listener);
 	}
 
@@ -89,8 +98,14 @@ public class PostgresPlanView extends ViewPart {
 							String url = ExplainPostgreSQLPlugin.getExplainAPI().plan_archive(plan, query).join();
 							if (eBrowser != null) {
 								eBrowser.openURL(new URL(url));
-							} else {
+							} else if (fBrowser != null) {
 								fBrowser.setUrl(url);
+							} else {
+								log.log(new Status(IStatus.ERROR,
+										ExplainPostgreSQLPlugin.PLUGIN_ID,
+										"No browser for explain"
+									)
+								);
 							}
 						} catch (Exception ex) {
 							log.log(new Status(IStatus.ERROR,

@@ -14,6 +14,7 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
@@ -38,18 +39,34 @@ public class PlanViewer extends Viewer {
 	IPreferenceStore store;
 	private Browser fBrowser;
 	private IWebBrowser eBrowser;
+	Label label;
 	private Pattern reDouble = Pattern.compile("^-?\\d+(\\.\\d+)?$");
 	private Pattern reInteger = Pattern.compile("^-?\\d+$");
 
 	public PlanViewer(IWorkbenchPart workbenchPart, Composite parent) {
 		super();
 		store = ExplainPostgreSQLPlugin.getDefault().getPreferenceStore();
-		fBrowser = new Browser(parent, SWT.NONE);
+		try {
+			fBrowser = new Browser(parent, SWT.NONE);
+		} catch (Throwable thr) {
+			store.setValue(PreferenceConstants.P_EXTERNAL, true);
+			label = new Label (parent, SWT.CENTER);
+			label.setText("chromium browser is not supported");
+			log.log(new Status(IStatus.ERROR,
+					ExplainPostgreSQLPlugin.PLUGIN_ID,
+					"createBrowser failed: " + thr.getMessage()
+				)
+			);
+		}
 	}
 
 	@Override
 	public Control getControl() {
-		return fBrowser;
+		if (label != null) {
+			return label;
+		} else {
+			return fBrowser;
+		}
 	}
 
 	@Override
@@ -105,8 +122,14 @@ public class PlanViewer extends Viewer {
 			String url = ExplainPostgreSQLPlugin.getExplainAPI().plan_archive(root.toString(), query.getText()).join();
 			if (eBrowser != null) {
 				eBrowser.openURL(new URL(url));
-			} else {
+			} else if (fBrowser != null) {
 				fBrowser.setUrl(url);
+			} else {
+				log.log(new Status(IStatus.ERROR,
+						ExplainPostgreSQLPlugin.PLUGIN_ID,
+						"No browser for explain"
+					)
+				);
 			}
 		} catch (Exception ex) {
 			log.log(new Status(IStatus.ERROR,
