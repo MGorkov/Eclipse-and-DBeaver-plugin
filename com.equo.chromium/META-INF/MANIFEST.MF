@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Chromium SWT Browser
+Bundle-SymbolicName: com.equo.chromium
+Bundle-Version: 116.0.5.withcef
+Bundle-ClassPath: com.equo.chromium_116.0.5.jar
+Bundle-Vendor: Equo
+Export-Package: com.equo.chromium,
+ com.equo.chromium.swt,
+ com.equo.chromium.utils,
+ org.cef,
+ org.cef.browser,
+ org.cef.browser.mac,
+ org.cef.callback,
+ org.cef.handler,
+ org.cef.misc,
+ org.cef.network
+Require-Bundle: org.eclipse.swt;resolution:=optional
+Bundle-ActivationPolicy: lazy
+Build-Jdk: 1.8.0_201
+Created-By: Apache Maven 3.6.0
+Automatic-Module-Name: com.equo.chromium
+Service-Component: OSGI-INF/*.xml
+Built-By: root

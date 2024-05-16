@@ -2,10 +2,10 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Explain PostgreSQL for DBeaver
 Bundle-SymbolicName: ru.tensor.explain.dbeaver;singleton:=true
-Bundle-Version: 1.0.4.qualifier
-Require-Bundle: org.jkiss.dbeaver.ui.editors.sql,
- com.google.gson,
- com.equo.chromium,
+Bundle-Version: 1.2.1.qualifier
+Require-Bundle: com.google.gson,
+ com.equo.chromium;bundle-version="[116.0.5.withcef,116.0.5.withcef]",
+ org.jkiss.dbeaver.ui.editors.sql,
  org.jkiss.dbeaver.model.jdbc,
  org.jkiss.dbeaver.ext.postgresql
 Bundle-Vendor: Tensor Company Ltd

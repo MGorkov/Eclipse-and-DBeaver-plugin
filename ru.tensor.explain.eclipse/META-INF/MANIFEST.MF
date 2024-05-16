@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Explain PostgreSQL for Eclipse
 Bundle-SymbolicName: ru.tensor.explain.eclipse;singleton:=true
-Bundle-Version: 1.0.4.qualifier
+Bundle-Version: 1.2.1.qualifier
 Require-Bundle: org.eclipse.core.resources,
  org.eclipse.core.runtime,
  org.eclipse.ui,
@@ -11,7 +11,7 @@ Require-Bundle: org.eclipse.core.resources,
  org.eclipse.datatools.sqltools.sqleditor,
  org.eclipse.datatools.sqltools.plan,
  com.google.gson,
- com.equo.chromium,
+ com.equo.chromium;bundle-version="[116.0.5.withcef,116.0.5.withcef]",
  org.jkiss.dbeaver.model.jdbc;resolution:=optional,
  org.jkiss.dbeaver.ext.postgresql;resolution:=optional,
  org.jkiss.dbeaver.ui.editors.sql;resolution:=optional

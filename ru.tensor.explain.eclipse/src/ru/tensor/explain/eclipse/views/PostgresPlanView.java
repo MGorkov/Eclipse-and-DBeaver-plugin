@@ -48,6 +48,7 @@ public class PostgresPlanView extends ViewPart {
 		store = ExplainPostgreSQLPlugin.getDefault().getPreferenceStore();
 		try {
 			fBrowser = new Browser(parent, SWT.NONE);
+//			fBrowser.setUrl(store.getString(PreferenceConstants.P_SITE));
 		} catch (Throwable thr) {
 			store.setValue(PreferenceConstants.P_EXTERNAL, true);
 			log.log(new Status(IStatus.ERROR,
@@ -94,27 +95,28 @@ public class PostgresPlanView extends ViewPart {
 							eBrowser = null;
 						}
 												
-						try {
-							String url = ExplainPostgreSQLPlugin.getExplainAPI().plan_archive(plan, query).join();
-							if (eBrowser != null) {
-								eBrowser.openURL(new URL(url));
-							} else if (fBrowser != null) {
-								fBrowser.setUrl(url);
-							} else {
+						ExplainPostgreSQLPlugin.getExplainAPI().plan_archive(plan, query, (String url) -> {
+							try {
+								if (eBrowser != null) {
+									eBrowser.openURL(new URL(url));
+								} else if (fBrowser != null) {
+									fBrowser.setUrl(url);
+								} else {
+									log.log(new Status(IStatus.ERROR,
+											ExplainPostgreSQLPlugin.PLUGIN_ID,
+											"No browser for explain"
+										)
+									);
+								}
+							} catch (Exception ex) {
 								log.log(new Status(IStatus.ERROR,
-										ExplainPostgreSQLPlugin.PLUGIN_ID,
-										"No browser for explain"
-									)
+											ExplainPostgreSQLPlugin.PLUGIN_ID,
+											"Explain failed! Error: " + ex.getMessage()
+										)
 								);
-							}
-						} catch (Exception ex) {
-							log.log(new Status(IStatus.ERROR,
-										ExplainPostgreSQLPlugin.PLUGIN_ID,
-										"Explain failed! Error: " + ex.getMessage()
-									)
-							);
-							MessageDialog.openError(null, "Explain PostgreSQL explainer", ex.getMessage());
-						}
+								MessageDialog.openError(null, "Explain PostgreSQL explainer", ex.getMessage());
+							}							
+						});
 					}
 				});
 				return Status.OK_STATUS;

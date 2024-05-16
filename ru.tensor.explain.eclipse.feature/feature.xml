@@ -2,7 +2,7 @@
 <feature
       id="ru.tensor.explain.eclipse.feature"
       label="Explain PostgreSQL for Eclipse"
-      version="1.0.4.qualifier"
+      version="1.2.1.qualifier"
       provider-name="Tensor Company Ltd">
 
    <description url="https://github.com/MGorkov/Eclipse-and-DBeaver-plugin">
@@ -49,12 +49,15 @@ SOFTWARE.
    <requires>
       <import feature="org.eclipse.datatools.sqldevtools.feature" version="1.14.102.201911250848" match="compatible"/>
       <import feature="org.eclipse.datatools.enablement.postgresql.feature" version="1.14.102.201911250848" match="compatible"/>
-      <import feature="com.equo.chromium.feature" version="116.0.2" match="compatible"/>
-      <import feature="com.equo.chromium.cef.feature" version="116.0.2" match="compatible"/>
+      <import feature="com.equo.chromium.cef.feature" version="116.0.5" match="perfect"/>
    </requires>
 
    <plugin
          id="ru.tensor.explain.eclipse"
+         version="0.0.0"/>
+
+   <plugin
+         id="com.equo.chromium"
          version="0.0.0"/>
 
 </feature>

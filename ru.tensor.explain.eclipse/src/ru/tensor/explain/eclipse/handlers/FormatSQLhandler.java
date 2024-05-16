@@ -43,38 +43,40 @@ public class FormatSQLhandler extends AbstractHandler {
 		Job job = new Job("Explain PostgreSQL Format Thread") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
+				ExplainPostgreSQLPlugin.getExplainAPI().beautifier(sql, (String fmtText) -> {
+					window.getWorkbench().getDisplay().asyncExec(new Runnable() {
 
-				window.getWorkbench().getDisplay().asyncExec(new Runnable() {
+						@Override
+						public void run() {
+							try {
+								if (fmtText.startsWith("Error")) {
+									throw new Exception (fmtText);
+								}
+								
+								IDocument doc = editor.getDocumentProvider().getDocument(editor.getEditorInput());
 
-					@Override
-					public void run() {
-						try {
-							String fmtText = ExplainPostgreSQLPlugin.getExplainAPI().beautifier(sql).join();
-							if (fmtText.startsWith("Error")) {
-								throw new Exception (fmtText);
+								if (isSelection) {
+									TextSelection selection = (TextSelection) editor.getSelectionProvider().getSelection();
+									int offset = selection.getOffset();
+									int length = selection.getLength();
+									doc.replace(offset, length, fmtText);
+									editor.selectAndReveal(offset, fmtText.length());
+								} else {
+									doc.set(fmtText);
+								}
+							} catch (Exception ex) {
+								ExplainPostgreSQLPlugin.getDefault().getLog().log(
+										new Status(IStatus.ERROR,
+												ExplainPostgreSQLPlugin.PLUGIN_ID,
+												"Format failed! Error: " + ex.getMessage()
+												)
+									);
+								MessageDialog.openError(window.getShell(), "Explain PostgreSQL formatter", ex.getMessage());
 							}
-							
-							IDocument doc = editor.getDocumentProvider().getDocument(editor.getEditorInput());
-
-							if (isSelection) {
-								TextSelection selection = (TextSelection) editor.getSelectionProvider().getSelection();
-								int offset = selection.getOffset();
-								int length = selection.getLength();
-								doc.replace(offset, length, fmtText);
-								editor.selectAndReveal(offset, fmtText.length());
-							} else {
-								doc.set(fmtText);
-							}
-						} catch (Exception ex) {
-							ExplainPostgreSQLPlugin.getDefault().getLog().log(
-									new Status(IStatus.ERROR,
-											ExplainPostgreSQLPlugin.PLUGIN_ID,
-											"Format failed! Error: " + ex.getMessage()
-											)
-								);
-							MessageDialog.openError(window.getShell(), "Explain PostgreSQL formatter", ex.getMessage());
 						}
-					}
+						
+					});
+					
 				});
 				return Status.OK_STATUS;
 			}

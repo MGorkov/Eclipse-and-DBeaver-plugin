@@ -2,7 +2,7 @@
 <feature
       id="ru.tensor.explain.dbeaver.feature"
       label="Explain PostgreSQL for DBeaver"
-      version="1.0.4.qualifier"
+      version="1.2.1.qualifier"
       provider-name="Tensor Company Ltd">
 
    <description url="https://github.com/MGorkov/Eclipse-and-DBeaver-plugin">
@@ -47,8 +47,7 @@ SOFTWARE.
    </url>
 
    <requires>
-      <import feature="com.equo.chromium.cef.feature" version="116.0.2" match="compatible"/>
-      <import feature="com.equo.chromium.feature" version="116.0.2" match="compatible"/>
+      <import feature="com.equo.chromium.cef.feature" version="116.0.5" match="perfect"/>
    </requires>
 
    <plugin

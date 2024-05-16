@@ -1,11 +1,11 @@
 package ru.tensor.explain.eclipse.api;
 
-import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
 
 public interface IExplainAPI {
 
-	CompletableFuture<String> beautifier(String sql);
+	public void beautifier(String sql, Consumer<String> callback);
 
-	CompletableFuture<String> plan_archive(String plan, String query);
-
+	public void plan_archive(String plan, String query, Consumer<String> callback);
+	
 }

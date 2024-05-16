@@ -100,45 +100,46 @@ public class PlanViewer extends Viewer {
 			root.add("Plan", serializeNode(node));
 		}
 
-		try {
-			boolean useExternalBrowser = store.getBoolean(PreferenceConstants.P_EXTERNAL);
-			if (useExternalBrowser) {
-				if (eBrowser == null) {
-					IWorkbenchBrowserSupport browserSupport = PlatformUI.getWorkbench().getBrowserSupport();
-					try {
-						eBrowser = browserSupport.createBrowser(IWorkbenchBrowserSupport.AS_EXTERNAL, "ru.tensor.expain", "Explain PostgreSQL", "Explain PostgreSQL");
-					} catch (PartInitException ex) {
-						log.log(new Status(IStatus.ERROR,
-									ExplainPostgreSQLPlugin.PLUGIN_ID,
-									"createBrowser failed: " + ex.getMessage()
-								)
-						);
-					}
+		boolean useExternalBrowser = store.getBoolean(PreferenceConstants.P_EXTERNAL);
+		if (useExternalBrowser) {
+			if (eBrowser == null) {
+				IWorkbenchBrowserSupport browserSupport = PlatformUI.getWorkbench().getBrowserSupport();
+				try {
+					eBrowser = browserSupport.createBrowser(IWorkbenchBrowserSupport.AS_EXTERNAL, "ru.tensor.expain", "Explain PostgreSQL", "Explain PostgreSQL");
+				} catch (PartInitException ex) {
+					log.log(new Status(IStatus.ERROR,
+								ExplainPostgreSQLPlugin.PLUGIN_ID,
+								"createBrowser failed: " + ex.getMessage()
+							)
+					);
 				}
-			} else if (eBrowser != null) {
-				eBrowser.close();
-				eBrowser = null;
 			}
-			String url = ExplainPostgreSQLPlugin.getExplainAPI().plan_archive(root.toString(), query.getText()).join();
-			if (eBrowser != null) {
-				eBrowser.openURL(new URL(url));
-			} else if (fBrowser != null) {
-				fBrowser.setUrl(url);
-			} else {
+		} else if (eBrowser != null) {
+			eBrowser.close();
+			eBrowser = null;
+		}
+		ExplainPostgreSQLPlugin.getExplainAPI().plan_archive(root.toString(), query.getText(), (String url) -> {
+			try {
+				if (eBrowser != null) {
+					eBrowser.openURL(new URL(url));
+				} else if (fBrowser != null) {
+					fBrowser.setUrl(url);
+				} else {
+					log.log(new Status(IStatus.ERROR,
+							ExplainPostgreSQLPlugin.PLUGIN_ID,
+							"No browser for explain"
+						)
+					);
+				}
+			} catch (Exception ex) {
 				log.log(new Status(IStatus.ERROR,
-						ExplainPostgreSQLPlugin.PLUGIN_ID,
-						"No browser for explain"
-					)
-				);
-			}
-		} catch (Exception ex) {
-			log.log(new Status(IStatus.ERROR,
 						ExplainPostgreSQLPlugin.PLUGIN_ID,
 						"Explain failed! Error: " + ex.getMessage()
 					)
-			);
-			MessageDialog.openError(null, "Explain PostgreSQL explainer", ex.getMessage());
-		}
+				);
+				MessageDialog.openError(null, "Explain PostgreSQL explainer", ex.getMessage());
+			}
+		});
 
 	}
 	
