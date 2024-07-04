@@ -3,10 +3,10 @@
    <description name="Explain PostgreSQL update site" url="https://explain.tensor.ru/downloads/plugins/eclipse/">
       Explain PostgreSQL update site
    </description>
-   <feature url="features/ru.tensor.explain.eclipse.feature_1.2.1.20240515.jar" id="ru.tensor.explain.eclipse.feature" version="1.2.1.20240515">
+   <feature url="features/ru.tensor.explain.eclipse.feature_1.2.2.20240704.jar" id="ru.tensor.explain.eclipse.feature" version="1.2.2.20240704">
       <category name="ru.tensor.explain"/>
    </feature>
-   <feature url="features/ru.tensor.explain.dbeaver.feature_1.2.1.20240515.jar" id="ru.tensor.explain.dbeaver.feature" version="1.2.1.20240515">
+   <feature url="features/ru.tensor.explain.dbeaver.feature_1.2.2.20240704.jar" id="ru.tensor.explain.dbeaver.feature" version="1.2.2.20240704">
       <category name="ru.tensor.explain"/>
    </feature>
    <category-def name="ru.tensor.explain" label="Explain PostgreSQL">

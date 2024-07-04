@@ -2,7 +2,7 @@
 <feature
       id="ru.tensor.explain.eclipse.feature"
       label="Explain PostgreSQL for Eclipse"
-      version="1.2.1.qualifier"
+      version="1.2.2.qualifier"
       provider-name="Tensor Company Ltd">
 
    <description url="https://github.com/MGorkov/Eclipse-and-DBeaver-plugin">

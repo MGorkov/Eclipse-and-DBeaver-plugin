@@ -152,7 +152,7 @@ public class PlanViewer extends Viewer {
 			for (DBPPropertyDescriptor p : properties) {
 				String id = p.getId();
 				Object value = pgNode.getPropertyValue(null, id);
-				String jsonId = id.replace("I-O", "I/O").replace('-', ' ');
+				String jsonId = id.replace("I-O", "I/O").replace('-', ' ').replace("One Time", "One-Time");
 				if (reInteger.matcher(value.toString()).matches()) {
 					attr.addProperty(jsonId, Integer.parseInt(value.toString()));
 				} else if (reDouble.matcher(value.toString()).matches()) {
@@ -161,6 +161,15 @@ public class PlanViewer extends Viewer {
 					attr.addProperty(jsonId, true);
 				} else if (value.equals("false")) {
 					attr.addProperty(jsonId, false);
+				} else if (value.toString().startsWith("\n ")) {
+					JsonArray arr = new JsonArray();
+					String[] values = value.toString().split("\n\s+");
+					for (String s : values) {
+						if (s.length() > 0) {
+							arr.add(s);
+						}
+					}
+					attr.add(jsonId, arr);
 				} else {
 					attr.addProperty(jsonId, value.toString());
 				}
